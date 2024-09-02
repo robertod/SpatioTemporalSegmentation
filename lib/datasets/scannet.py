@@ -158,8 +158,8 @@ class ScannetVoxelizationDataset(VoxelizationDataset):
           verbose=False)
       # Evaluate IoU.
       if self.IGNORE_LABELS is not None:
-        ptc_pred = np.array([self.label_map[x] for x in ptc_pred], dtype=np.int)
-        query_label = np.array([self.label_map[x] for x in query_label], dtype=np.int)
+        ptc_pred = np.array([self.label_map[x] for x in ptc_pred], dtype=int)
+        query_label = np.array([self.label_map[x] for x in query_label], dtype=int)
       hist += fast_hist(ptc_pred, query_label, self.NUM_LABELS)
     ious = per_class_iu(hist) * 100
     print('mIoU: ' + str(np.nanmean(ious)) + '\n'
