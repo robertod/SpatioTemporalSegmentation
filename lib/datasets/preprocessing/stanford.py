@@ -41,11 +41,8 @@ class Stanford3DDatasetConverter:
 
   @classmethod
   def read_txt(cls, txtfile):
-    # Read txt file and parse its content.
-    with open(txtfile) as f:
-      pointcloud = [l.split() for l in f]
-    # Load point cloud to named numpy array.
-    pointcloud = np.array(pointcloud).astype(np.float32)
+    # Read txt file and parse its content into a numpy array.
+    pointcloud = np.loadtxt(txtfile).astype(np.float32)
     assert pointcloud.shape[1] == 6
     xyz = pointcloud[:, :3].astype(np.float32)
     rgb = pointcloud[:, 3:].astype(np.uint8)
@@ -88,7 +85,7 @@ class Stanford3DDatasetConverter:
         coords = np.concatenate(coords, 0)
         feats = np.concatenate(feats, 0)
         labels = np.concatenate(labels, 0)
-        inds, collabels = ME.utils.sparse_quantize(
+        _,_, colabels, inds = ME.utils.sparse_quantize(
             coords,
             feats,
             labels,
@@ -96,7 +93,7 @@ class Stanford3DDatasetConverter:
             ignore_label=255,
             quantization_size=0.01  # 1cm
         )
-        pointcloud = np.concatenate((coords[inds], feats[inds], collabels[:, None]), axis=1)
+        pointcloud = np.concatenate((coords[inds], feats[inds], colabels[:, None]), axis=1)
 
         # Write ply file.
         mkdir_p(target_path)
