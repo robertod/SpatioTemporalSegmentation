@@ -9,9 +9,7 @@ matplotlib
 scikit-learn
 
 # Logging using tensorboardX
-tensorflow-tensorboard
-tensorboard-pytorch
-tensorboardX
+tensorboard
 
 # Mesh related packages
 plyfile
