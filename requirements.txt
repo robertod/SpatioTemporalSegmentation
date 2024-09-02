@@ -6,7 +6,7 @@ torchvision
 seaborn
 imageio
 matplotlib
-sklearn
+scikit-learn
 
 # Logging using tensorboardX
 tensorflow-tensorboard
