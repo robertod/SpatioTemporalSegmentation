@@ -4,7 +4,7 @@ import os.path as osp
 import torch
 from torch import nn
 
-from tensorboardX import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 
 from lib.test import test
 from lib.utils import checkpoint, precision_at_one, \
