@@ -67,7 +67,7 @@ def test(model, data_loader, config, transform_data_fn=None, has_gt=True):
   logging.info('===> Start testing')
 
   global_timer.tic()
-  data_iter = data_loader.__iter__()
+  data_iter = iter(data_loader)
   max_iter = len(data_loader)
   max_iter_unique = max_iter
 
@@ -91,9 +91,9 @@ def test(model, data_loader, config, transform_data_fn=None, has_gt=True):
     for iteration in range(max_iter):
       data_timer.tic()
       if config.return_transformation:
-        coords, input, target, transformation = data_iter.next()
+        coords, input, target, transformation = next(data_iter)
       else:
-        coords, input, target = data_iter.next()
+        coords, input, target = next(data_iter)
         transformation = None
       data_time = data_timer.toc(False)
 
