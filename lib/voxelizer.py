@@ -1,4 +1,9 @@
-import collections.abc as collections
+import sys
+
+if sys.version_info[:2] >= (3, 8):
+    import collections.abc as collections
+else:
+    import collections
 
 import numpy as np
 import MinkowskiEngine as ME
