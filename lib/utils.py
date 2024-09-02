@@ -230,7 +230,7 @@ def save_rotation_pred(iteration, pred, dataset, save_pred_dir):
   decode_label_map = {}
   for k, v in dataset.label_map.items():
     decode_label_map[v] = k
-  pred = np.array([decode_label_map[x] for x in pred], dtype=np.int)
+  pred = np.array([decode_label_map[x] for x in pred], dtype=int)
   out_rotation_txt = dataset.get_output_id(iteration) + '.txt'
   out_rotation_path = save_pred_dir + '/' + out_rotation_txt
   np.savetxt(out_rotation_path, pred, fmt='%i')
@@ -274,7 +274,7 @@ def save_predictions(coords, upsampled_pred, transformation, dataset, config, it
         decode_label_map = {}
         for k, v in dataset.label_map.items():
           decode_label_map[v] = k
-        orig_pred = np.array([decode_label_map[x] for x in orig_pred], dtype=np.int)
+        orig_pred = np.array([decode_label_map[x] for x in orig_pred], dtype=int)
     # Determine full path of the destination.
     full_pred = np.hstack((orig_coords[:, :3], np.expand_dims(orig_pred, 1)))
     filename = 'pred_%04d_%02d.npy' % (iteration, i)
