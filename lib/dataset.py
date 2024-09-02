@@ -289,7 +289,7 @@ class VoxelizationDataset(VoxelizationDatasetBase):
     if self.target_transform is not None:
       coords, feats, labels = self.target_transform(coords, feats, labels)
     if self.IGNORE_LABELS is not None:
-      labels = np.array([self.label_map[x] for x in labels], dtype=np.int)
+      labels = np.array([self.label_map[x] for x in labels], dtype=int)
 
     # Use coordinate features if config is set
     if self.AUGMENT_COORDS_TO_FEATS:
@@ -395,7 +395,7 @@ class TemporalVoxelizationDataset(VoxelizationDataset):
       joint_coords, joint_feats, joint_labels = self.target_transform(joint_coords, joint_feats,
                                                                       joint_labels)
     if self.IGNORE_LABELS is not None:
-      joint_labels = np.array([self.label_map[x] for x in joint_labels], dtype=np.int)
+      joint_labels = np.array([self.label_map[x] for x in joint_labels], dtype=int)
 
     return_args = [joint_coords, joint_feats, joint_labels]
     if self.return_transformation:
