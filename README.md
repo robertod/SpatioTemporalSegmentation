@@ -7,19 +7,21 @@ This repository contains the accompanying code for [4D-SpatioTemporal ConvNets: 
 
 ## Change Log
 
-- 2020-05-19 The latest Minkowski Engine since the commit [be5c3](https://github.com/StanfordVL/MinkowskiEngine/commit/be5c3c18b26d6a62380d613533b7a939a5458705), does not require explicit cache clear and can use the memory more efficiently.
+- 2024-09-03: The continually changing nature of some Python library APIs has caused the original code to become incompatible, making it a nuisance to configure with modern hardware (i.e. Ada and onward GPUs). This branch alters the code to work with the included DockerFile.
+- 2020-05-19: The latest Minkowski Engine since the commit [be5c3](https://github.com/StanfordVL/MinkowskiEngine/commit/be5c3c18b26d6a62380d613533b7a939a5458705), does not require explicit cache clear and can use the memory more efficiently.
 - 2020-05-04: As pointed out by Thomas Chaton on [Issue#30](https://github.com/chrischoy/SpatioTemporalSegmentation/issues/30), I also found out that the training script contains bugs that models cannot reach the target performance described in the Model Zoo with the latest MinkowskiEngine. I am in the process of debugging the bugs, but I am having some difficulty finding the bugs. So, I created another git repo [SpatioTemporalSegmentation-ScanNet](https://github.com/chrischoy/SpatioTemporalSegmentation-ScanNet) from my other private repo that reaches the target performance. Please refer to the [SpatioTemporalSegmentation-ScanNet](https://github.com/chrischoy/SpatioTemporalSegmentation-ScanNet) for the ScanNet training. I'll update this repo once I find the bugs and merge SpatioTemporalSegmentation-ScanNet with this repo. Sorry for the trouble.
 
 ## Requirements
-
-- Ubuntu 14.04 or higher
-- CUDA 10.1 or higher
-- pytorch 1.3 or higher
-- python 3.6 or higher
-- GCC 6 or higher
-
+The listed requirements refer to the environment created the project's DockerFile. It is likely (but not guaranteed) that it also works with some slightly older/newer configurations.
+- Ubuntu 20.04
+- CUDA 11.8
+- PyTorch 2.4.0
+- Python 3.11
+- GCC 7
 
 ## Installation
+
+The easier way to install this is to create an image in Docker using the DockerFile. Alternatively, it is possible to copy and paste into the command line. Windows users should use [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 You need to install `pytorch` and [`Minkowski Engine`][pypi-url] either with `pip` or with anaconda.
 
