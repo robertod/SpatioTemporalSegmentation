@@ -62,7 +62,7 @@ def train(model, data_loader, val_data_loader, config, transform_data_fn=None):
     else:
       raise ValueError("=> no checkpoint found at '{}'".format(checkpoint_fn))
 
-  data_iter = data_loader.__iter__()
+  data_iter = iter(data_loader)
   while is_training:
     for iteration in range(len(data_loader) // config.iter_size):
       optimizer.zero_grad()
@@ -72,7 +72,7 @@ def train(model, data_loader, val_data_loader, config, transform_data_fn=None):
       for sub_iter in range(config.iter_size):
         # Get training data
         data_timer.tic()
-        coords, input, target = data_iter.next()
+        coords, input, target = next(data_iter)
 
         # For some networks, making the network invariant to even, odd coords is important. Random translation
         coords[:, 1:] += (torch.rand(3) * 100).type_as(coords)
@@ -81,7 +81,7 @@ def train(model, data_loader, val_data_loader, config, transform_data_fn=None):
         color = input[:, :3].int()
         if config.normalize_color:
           input[:, :3] = input[:, :3] / 255. - 0.5
-        sinput = SparseTensor(input, coords).to(device)
+        sinput = SparseTensor(input, coords, device=device)
 
         data_time += data_timer.toc(False)
 
