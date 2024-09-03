@@ -104,7 +104,7 @@ def test(model, data_loader, config, transform_data_fn=None, has_gt=True):
         color = input[:, :3].int()
       if config.normalize_color:
         input[:, :3] = input[:, :3] / 255. - 0.5
-      sinput = SparseTensor(input, coords).to(device)
+      sinput = SparseTensor(input, coords, device=device)
 
       # Feed forward
       inputs = (sinput,) if config.wrapper_type == 'None' else (sinput, coords, color)
