@@ -51,7 +51,7 @@ def average_precision(prob_np, target_np):
   num_class = prob_np.shape[1]
   label = label_binarize(target_np, classes=list(range(num_class)))
   with np.errstate(divide='ignore', invalid='ignore'):
-    return average_precision_score(label, prob_np, None)
+    return average_precision_score(label, prob_np, average=None)
 
 
 def test(model, data_loader, config, transform_data_fn=None, has_gt=True):
